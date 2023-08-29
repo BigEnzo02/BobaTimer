@@ -10,8 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
-public class notifPusher extends AppCompatActivity {
-    public void sendNotif(Button notificationButton){
+public class NotifPusher extends AppCompatActivity {
+    public void initNotif(Button notificationButton){
         createNotificationChannel();
 
 
