@@ -4,12 +4,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import java.util.TimerTask;
+
 public class Timer {
 
-    public void StartTimer(){
-        System.out.println("timer start");
-        //ImageButton startTimerButton = android.view.view (ImageButton) Find= "@+id/button";
-        //View.OnClickListener  =
-    }
+    Timer timer = new Timer();
+    TimerTask t = new TimerTask() {
+        @Override
+        public void run() {
+
+            System.out.println("1");
+        }
+    };
 
 }
