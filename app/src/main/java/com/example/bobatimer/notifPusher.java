@@ -1,18 +1,42 @@
 package com.example.bobatimer;
 
-import androidx.core.app.NotificationCompat;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
+import android.os.Build;
+import android.widget.Button;
 
-public class notifPusher {
-    public void sendNotif(){
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "lemubitA")
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+
+public class notifPusher extends AppCompatActivity {
+    public void sendNotif(Button notificationButton){
+        createNotificationChannel();
+
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "bobaTimer")
                 .setSmallIcon(R.drawable.boba)
                 .setContentTitle("Boba App")
                 .setContentText("Your timer is done!")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+
+        notificationButton.setOnClickListener(v -> {notificationManager.notify(100, builder.build());});
+
     }
 
     private void  createNotificationChannel(){
-        
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            CharSequence name = "timerChannel";
+            String desc = "Channel to send notifications";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("bobaTimer", name, importance);
+            channel.setDescription(desc);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 }
