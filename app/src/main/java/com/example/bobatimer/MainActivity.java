@@ -11,7 +11,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        NotifPusher notif = new NotifPusher();
-//        notif.initNotif();
+        //create new notification class
+        NotifPusher notif = new NotifPusher();
+        //create channel and listener from button ID
+        notif.initNotif(findViewById(R.id.bobaTimer));
     }
 }
