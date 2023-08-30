@@ -1,7 +1,12 @@
 package com.example.bobatimer;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -28,36 +33,33 @@ public class MainActivity extends AppCompatActivity {
 
         timerButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 toggleTimer();
             }
         });
 
-        //create new notification class
-        //NotifPusher notif = new NotifPusher();
-        //create channel and listener from button ID
-        //notif.initNotif(timerButton);
-
     }
+
     public void toggleTimer() {
-        if (timerOn){
+        if (timerOn) {
             stopTimer();
         } else {
             startTimer();
         }
     }
 
-    public void startTimer(){
+    public void startTimer() {
         //creates a new countdowntimer w/ tick every second
-        countDownTimer = new CountDownTimer(millisecondsRemaining, 1000){
+        countDownTimer = new CountDownTimer(millisecondsRemaining, 1000) {
             //updates l (remaining time in timer) every second
             @Override
-            public void onTick(long l){
+            public void onTick(long l) {
                 millisecondsRemaining = l;
                 updateTimer();
             }
+
             @Override
-            public void onFinish(){
+            public void onFinish() {
 
             }
 
@@ -67,24 +69,59 @@ public class MainActivity extends AppCompatActivity {
         timerOn = true;
 
     }
-    public void stopTimer(){
+
+    public void stopTimer() {
         countDownTimer.cancel();
         timerButton.setText("START");
         timerOn = false;
     }
 
     //updates clock every tick
-    public void updateTimer(){
+    public void updateTimer() {
         int minutes = (int) millisecondsRemaining / 60000;
         int seconds = (int) millisecondsRemaining % 60000 / 1000;
 
         String timeRemainingText = "" + minutes + ":";
         //ensures 2 digits in the seconds column
-        if (seconds < 10){
+        if (seconds < 10) {
             timeRemainingText += "0";
         }
+        //timer is up
+        if (seconds <= 0){
+            sendNotification();
+        }
+
         timeRemainingText += seconds;
         timerText.setText(timeRemainingText);
     }
 
+    //create a notification object with builder object and send it
+    public void sendNotification() {
+        String id = createNotificationChannel();
+
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, id)
+                .setSmallIcon(R.drawable.boba)      //icon that appears in bar and next to notification
+                .setContentTitle("Boba App")        //small title that appears above the notification
+                .setContentText("Your timer is done!")      //text that appears on the notification
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)       //where it appears in the notification list
+                .setAutoCancel(true);       //notification is removed when clicked on
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        notificationManager.notify(99, builder.build());
+    }
+
+    //private notification channel constructor
+    private String createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            String id = "bobaTimer";
+            NotificationChannel channel = new NotificationChannel(id, "timerChannel", NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setDescription("Timer notification");
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+            return id;
+        }
+        return null;
+    }
 }
