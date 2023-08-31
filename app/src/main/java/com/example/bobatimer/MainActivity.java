@@ -16,41 +16,33 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Timer;
+
 public class MainActivity extends AppCompatActivity {
-
-    private TextView timerText;
-    private Button timerButton;
-
-    private CountDownTimer countDownTimer;
-    private long millisecondsRemaining = 20000; //20 seconds
-    private boolean timerOn;
+    private Button startButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        startButton = findViewById(R.id.timer_button);
 
-        timerText = findViewById(R.id.timer_text);
-        timerButton = findViewById(R.id.timer_button);
-
-        timerButton.setOnClickListener(new View.OnClickListener() {
+        startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                toggleTimer();
+                newTimer();
             }
         });
 
     }
 
-    public void toggleTimer() {
-        if (timerOn) {
-            stopTimer();
-        } else {
-            startTimer();
-        }
+    public void newTimer(){
+        System.out.println("new Timer Added");
+        TimerPage newTimerPage = new TimerPage();
     }
 
+<<<<<<< Updated upstream
     public void startTimer() {
         //creates a new countdowntimer w/ tick every second
         countDownTimer = new CountDownTimer(millisecondsRemaining, 1000) {
@@ -96,6 +88,8 @@ public class MainActivity extends AppCompatActivity {
         timeRemainingText += seconds;
         timerText.setText(timeRemainingText);
     }
+=======
+>>>>>>> Stashed changes
 
     //create a notification object with builder object and send it
     public void sendNotification() {
