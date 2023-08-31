@@ -42,55 +42,6 @@ public class MainActivity extends AppCompatActivity {
         TimerPage newTimerPage = new TimerPage();
     }
 
-<<<<<<< Updated upstream
-    public void startTimer() {
-        //creates a new countdowntimer w/ tick every second
-        countDownTimer = new CountDownTimer(millisecondsRemaining, 1000) {
-            //updates l (remaining time in timer) every second
-            @Override
-            public void onTick(long l) {
-                millisecondsRemaining = l;
-                updateTimer();
-            }
-
-            @Override
-            public void onFinish() {
-
-            }
-
-        }.start(); //starts timer immediately
-
-        timerButton.setText(R.string.stop);
-        timerOn = true;
-    }
-
-    public void stopTimer() {
-        countDownTimer.cancel();
-        timerButton.setText(R.string.start);
-        timerOn = false;
-    }
-
-    //updates clock every tick
-    public void updateTimer() {
-        int minutes = (int) millisecondsRemaining / 60000;
-        int seconds = (int) millisecondsRemaining % 60000 / 1000;
-
-        String timeRemainingText = "" + minutes + ":";
-        //ensures 2 digits in the seconds column
-        if (seconds < 10) {
-            timeRemainingText += "0";
-        }
-        //timer is up
-        if (seconds <= 0){
-            sendNotification();
-        }
-
-        timeRemainingText += seconds;
-        timerText.setText(timeRemainingText);
-    }
-=======
->>>>>>> Stashed changes
-
     //create a notification object with builder object and send it
     public void sendNotification() {
         String id = createNotificationChannel();

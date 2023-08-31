@@ -21,8 +21,8 @@
 
     <TextView
         android:id="@+id/timer_90_text"
-        android:layout_width="414dp"
-        android:layout_height="200dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:textSize="70sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -34,21 +34,21 @@
 
     <TextView
         android:id="@+id/timer_60_text"
-        android:layout_width="414dp"
-        android:layout_height="200dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:textSize="70sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_centerHorizontal="true"
         tools:layout_centerVertical="true"
-        tools:layout_editor_absoluteY="239dp"
+        tools:layout_editor_absoluteY="214dp"
         tools:text="00:00" />
 
     <TextView
         android:id="@+id/timer_10_text"
-        android:layout_width="414dp"
-        android:layout_height="200dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:textSize="70sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
