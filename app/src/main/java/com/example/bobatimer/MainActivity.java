@@ -3,9 +3,11 @@ package com.example.bobatimer;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.app.TaskStackBuilder;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -99,6 +101,8 @@ public class MainActivity extends AppCompatActivity {
     public void sendNotification() {
         String id = createNotificationChannel();
 
+
+
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, id)
                 .setSmallIcon(R.drawable.boba)      //icon that appears in bar and next to notification
                 .setContentTitle("Boba App")        //small title that appears above the notification
@@ -106,6 +110,14 @@ public class MainActivity extends AppCompatActivity {
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)       //where it appears in the notification list
                 .setAutoCancel(true);       //notification is removed when clicked on
 
+        //declare intent to open app when clicked on
+        Intent resultIntent = new Intent(this, MainActivity.class);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        stackBuilder.addParentStack(MainActivity.class);
+        stackBuilder.addNextIntent(resultIntent);
+        PendingIntent resultPendingIntent =
+                stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+        builder.setContentIntent(resultPendingIntent);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
         notificationManager.notify(99, builder.build());
