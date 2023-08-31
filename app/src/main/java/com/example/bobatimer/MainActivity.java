@@ -6,6 +6,7 @@ import androidx.core.app.NotificationManagerCompat;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -65,14 +66,13 @@ public class MainActivity extends AppCompatActivity {
 
         }.start(); //starts timer immediately
 
-        timerButton.setText("STOP");
+        timerButton.setText(R.string.stop);
         timerOn = true;
-
     }
 
     public void stopTimer() {
         countDownTimer.cancel();
-        timerButton.setText("START");
+        timerButton.setText(R.string.start);
         timerOn = false;
     }
 
@@ -99,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
     public void sendNotification() {
         String id = createNotificationChannel();
 
-
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, id)
                 .setSmallIcon(R.drawable.boba)      //icon that appears in bar and next to notification
                 .setContentTitle("Boba App")        //small title that appears above the notification
@@ -107,14 +106,16 @@ public class MainActivity extends AppCompatActivity {
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)       //where it appears in the notification list
                 .setAutoCancel(true);       //notification is removed when clicked on
 
+
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
         notificationManager.notify(99, builder.build());
+
     }
 
     //private notification channel constructor
     private String createNotificationChannel() {
+        String id = "bobaTimer";
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            String id = "bobaTimer";
             NotificationChannel channel = new NotificationChannel(id, "timerChannel", NotificationManager.IMPORTANCE_DEFAULT);
             channel.setDescription("Timer notification");
 
@@ -122,6 +123,6 @@ public class MainActivity extends AppCompatActivity {
             notificationManager.createNotificationChannel(channel);
             return id;
         }
-        return null;
+        return id;
     }
 }
