@@ -3,18 +3,17 @@ package com.example.bobatimer;
 import android.os.CountDownTimer;
 import android.widget.TextView;
 
-import androidx.annotation.IdRes;
-
 public class Timer {
     private long millisecondsRemaining;
     private CountDownTimer countDownTimer;
     private TextView timerText;
 
 
-    public Timer (int minutes, @IdRes int viewId){
-        //the reason this breaks is because it is trying to invoke findViewById on a null object, but I everything I saw online just called findViewById
-        //without any object, which does not work either. Maybe there is a different solution that I cannot see?
-        timerText = timerText.findViewById(viewId);
+    public Timer (int minutes, TextView text){
+        //findViewById only works when called in MainActivity (something to do with setContentView?)
+        //so it must be passed in as an already established TextView param
+        timerText = text;
+
         millisecondsRemaining = minutes * 60000;
         this.startTimer();
         System.out.println(minutes + " Minute timer created");
@@ -32,6 +31,7 @@ public class Timer {
 
             @Override
             public void onFinish() {
+
             }
 
         }.start(); //starts timer immediately
