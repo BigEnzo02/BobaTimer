@@ -12,9 +12,11 @@ public class Timer {
 
 
     public Timer (int minutes, @IdRes int viewId){
+        //the reason this breaks is because it is trying to invoke findViewById on a null object, but I everything I saw online just called findViewById
+        //without any object, which does not work either. Maybe there is a different solution that I cannot see?
         timerText = timerText.findViewById(viewId);
         millisecondsRemaining = minutes * 60000;
-        startTimer();
+        this.startTimer();
         System.out.println(minutes + " Minute timer created");
     }
 

@@ -40,18 +40,20 @@ public class MainActivity extends AppCompatActivity {
     public void newTimer(){
         System.out.println("new Timer Added");
         TimerPage newTimerPage = new TimerPage();
+        newTimerPage.initTimer();
     }
 
     //create a notification object with builder object and send it
+//    public void sendNotification(int t_num, String t_title) {
     public void sendNotification() {
         String id = createNotificationChannel();
-
 
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, id)
                 .setSmallIcon(R.drawable.boba)      //icon that appears in bar and next to notification
                 .setContentTitle("Boba App")        //small title that appears above the notification
-                .setContentText("Your timer is done!")      //text that appears on the notification
+//                .setContentText("Your " + t_title + " alarm on timer number " + t_num + " is done!")      //text that appears on the notification
+                .setContentText("Your timer is done!")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)       //where it appears in the notification list
                 .setAutoCancel(true);       //notification is removed when clicked on
 
