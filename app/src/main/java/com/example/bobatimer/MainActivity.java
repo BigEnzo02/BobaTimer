@@ -20,6 +20,7 @@ import java.util.Timer;
 
 public class MainActivity extends AppCompatActivity {
     private Button startButton;
+    int numPots = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void newTimer(){
         System.out.println("new Timer Added");
-        TimerPage newTimerPage = new TimerPage();
+        TimerPage newTimerPage = new TimerPage(numPots);
+        numPots++;
         newTimerPage.initTimer(findViewById(R.id.timer_90_text), findViewById(R.id.timer_60_text), findViewById(R.id.timer_10_text));
     }
 
