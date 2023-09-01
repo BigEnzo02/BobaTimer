@@ -18,9 +18,13 @@ import android.widget.TextView;
 
 import java.util.Timer;
 
+import android.view.MotionEvent;
+
 public class MainActivity extends AppCompatActivity {
     private Button startButton;
     int numPots = 1;
+
+    float x1, x2, y1, y2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,5 +88,24 @@ public class MainActivity extends AppCompatActivity {
             return id;
         }
         return id;
+    }
+
+    public boolean onTouchEvent(MotionEvent touchEvent){
+        switch(touchEvent.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                x1 = touchEvent.getX();
+                y1= touchEvent.getY();
+                break;
+            case MotionEvent.ACTION_UP:
+                x2 = touchEvent.getX();
+                y2= touchEvent.getY();
+                if(x2 < x1){
+                    startActivity(new Intent(MainActivity.this, TestSwipeActivityRight.class));
+                } /*else if (x2 > x1){
+                    startActivity(new Intent(MainActivity.this, TestSwipeActivityRight.class));
+                }*/
+                break;
+        }
+        return false;
     }
 }
