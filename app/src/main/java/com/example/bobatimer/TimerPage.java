@@ -8,13 +8,15 @@ public class TimerPage {
     int potNum;
     private Timer timer90, timer60, timer10;
 
-    TimerPage(int num){
+    private Notif notification;
+    TimerPage(int num, Notif notificationObject){
         potNum = num;
+        notification = notificationObject;
     }
     public void initTimer(TextView timerLong, TextView timerMed, TextView timerShort){
-        timer90 = new Timer(90, timerLong);
-        timer60 = new Timer(60, timerMed);
-        timer10 = new Timer(10, timerShort);
+        timer90 = new Timer(90, timerLong, notification);
+        timer60 = new Timer(60, timerMed, notification);
+        timer10 = new Timer(2, timerShort, notification);
     }
 
 }

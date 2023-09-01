@@ -7,14 +7,17 @@ public class Timer {
     private long millisecondsRemaining;
     private CountDownTimer countDownTimer;
     private TextView timerText;
+    private final Notif notification;
+    private final int min;
 
-
-    public Timer (int minutes, TextView text){
+    public Timer (int minutes, TextView text, Notif notificationObject){
         //findViewById only works when called in MainActivity (something to do with setContentView?)
         //so it must be passed in as an already established TextView param
         timerText = text;
+        min = minutes;
+        notification = notificationObject;
 
-        millisecondsRemaining = minutes * 60000;
+        millisecondsRemaining = minutes * 1000;
         this.startTimer();
         System.out.println(minutes + " Minute timer created");
     }
@@ -31,7 +34,7 @@ public class Timer {
 
             @Override
             public void onFinish() {
-
+                notification.sendNotification(1, min);
             }
 
         }.start(); //starts timer immediately
