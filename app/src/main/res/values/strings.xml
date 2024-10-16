@@ -2,4 +2,7 @@
     <string name="app_name">BobaTimer</string>
     <string name="start">START</string>
     <string name="stop">STOP</string>
+    <string name="notif_title">Boba App</string>
+    <string name="removeButton">Remove</string>
+    <string name="timerLabel">Boba timer #</string>
 </resources>
